@@ -63,6 +63,10 @@ integrations:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
+  googleGcs:
+    clientEmail: ${GCS_CLIENT_EMAIL}
+    privateKey: ${GCS_PRIVATE_KEY}
+
 
 proxy:
   ### Example for how to add a proxy endpoint for the frontend.
@@ -84,22 +88,18 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
-  # see https://backstage.io/docs/auth/ to learn about auth providers
+  environment: development
   providers:
-    # See https://backstage.io/docs/auth/guest/provider
-    guest: {}
-  # see https://backstage.io/docs/ai/mcp-actions#client-id-metadata-documents
-  # to learn more about client id metadata documents
-  experimentalClientIdMetadataDocuments:
-    enabled: false
-    # Optional: restrict which `client_id` URLs are allowed (defaults to ['*'])
-    # allowedClientIdPatterns:
-    #   - 'https://example.com/*'
-    #   - 'https://*.trusted-domain.com/*'
-    # Optional: restrict which redirect URIs are allowed (defaults to ['*'])
-    # allowedRedirectUriPatterns:
-    #   - 'http://localhost:*'
-    #   - 'https://*.example.com/*'
+    google:
+      development:
+        clientId: ${AUTH_GOOGLE_CLIENT_ID}
+        clientSecret: ${AUTH_GOOGLE_CLIENT_SECRET}
+        ## uncomment to set lifespan of user session
+        # sessionDuration: { hours: 24 } # supports `ms` library format (e.g. '24h', '2 days'), ISO duration, "human duration" as used in code
+        signIn:
+          resolvers:
+            # See https://backstage.io/docs/auth/google/provider#resolvers for more resolvers
+            - resolver: emailMatchingUserEntityProfileEmail
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -127,6 +127,10 @@ catalog:
       rules:
         - allow: [User, Group]
 
+    - type: url
+      target: https://storage.cloud.google.com/backstage_xgandax/backstage_users.yaml
+      rules:
+        - allow: [User, Group]
     ## Uncomment these lines to add more example data
     # - type: url
     #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
