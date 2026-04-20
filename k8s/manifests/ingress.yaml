@@ -1,18 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: backstage
+  name: backstage-ingress
   namespace: backstage
-  annotations:
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure 
+  
 spec:
+  ingressClassName: traefik
   tls:
   - hosts:
-    - backstage.local
+    - backstage.xgandax.xyz
     secretName: backstage-tls
 
   rules:
-    - host: backstage.local
+    - host: backstage.xgandax.xyz
       http:
         paths:
           - path: /
