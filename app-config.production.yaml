@@ -36,7 +36,6 @@ backend:
       #     $file: <file-path>/ca/server.crt
 
 auth:
-  providers:
   environment: production
   providers:
     google:
