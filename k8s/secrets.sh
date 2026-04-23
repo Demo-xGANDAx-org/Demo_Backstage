@@ -1,6 +1,16 @@
-kubectl delete secret google-secrets -n backstage
+#!/bin/sh
 
-kubectl create secret generic -n backstage google-secrets \
+NAMESPACE="backstage"
+
+if ! kubectl get namespace "$NAMESPACE" >/dev/null 2>&1; then
+  kubectl create namespace "$NAMESPACE"
+else
+  echo "El namespace $NAMESPACE ya existe"
+fi
+
+kubectl delete secret google-secrets -n $NAMESPACE
+
+kubectl create secret generic -n $NAMESPACE google-secrets \
   --from-literal=AUTH_GOOGLE_CLIENT_ID="$AUTH_GOOGLE_CLIENT_ID" \
   --from-literal=AUTH_GOOGLE_CLIENT_SECRET="$AUTH_GOOGLE_CLIENT_SECRET" \
   --from-literal=GCS_CLIENT_EMAIL="$GCS_CLIENT_EMAIL" \
