@@ -21,6 +21,6 @@ kubectl delete secret ghcr-secret -n $NAMESPACE
 
 kubectl create secret docker-registry ghcr-secret \
   --docker-server=ghcr.io \
-  --docker-username=$USER \
-  --docker-password=$GITHUB_TOKEN_ACTIONS \
+  --docker-username="$USER" \
+  --docker-password="$GITHUB_TOKEN" \
   -n $NAMESPACE
