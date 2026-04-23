@@ -44,13 +44,13 @@ jobs:
       - name: Tag image
         id: tag_image
         run: |
-          IMAGE=ghcr.io/Demo-xGANDAx-org/backstage-app:${{ github.sha }}
+          IMAGE=ghcr.io/demo-xgandax-org/backstage-app:${{ github.sha }}
           docker tag backstage $IMAGE
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV  
           echo "image=$IMAGE" >> $GITHUB_OUTPUT  
 
       - name: Login to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u Demo-xGANDAx-org --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u demo-xgandax-org --password-stdin
 
       - name: Push image
         run: |
