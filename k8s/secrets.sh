@@ -19,7 +19,7 @@ kubectl create secret generic -n $NAMESPACE google-secrets \
 
 Kubectl delete secret ghcr-secret -n $NAMESPACE
 
-kubectl create secret docker-registry  -n $NAMESPACE ghcr-secret \
+kubectl create secret docker-registry -n $NAMESPACE ghcr-secret \
   --docker-server=ghcr.io \
   --docker-username= $USER\
   --docker-password= $GITHUB_TOKEN_ACTIONS\
