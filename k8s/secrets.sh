@@ -15,7 +15,7 @@ kubectl create secret generic -n $NAMESPACE google-secrets \
   --from-literal=AUTH_GOOGLE_CLIENT_SECRET="$AUTH_GOOGLE_CLIENT_SECRET" \
   --from-literal=GCS_CLIENT_EMAIL="$GCS_CLIENT_EMAIL" \
   --from-literal=GCS_PRIVATE_KEY="$GCS_PRIVATE_KEY" \
-  --from-literal=GITHUB_TOKEN="$GITHUB_TOKEN"
+  --from-literal=GITHUB_TOKEN="$K3S_GITHUB_TOKEN"
 
 kubectl delete secret ghcr-secret -n $NAMESPACE
 
