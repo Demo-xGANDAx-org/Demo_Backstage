@@ -14,7 +14,7 @@ kubectl apply -f k8s/manifests
 
 # 2. Actualizar solo la imagen del deployment
 echo "🔄 Updating deployment image"
-envsubst < k8s/deployment/deployment.yaml | kubectl apply -n $NAMESPACE -f -
+envsubst < k8s/manifests/deployment.yaml | kubectl apply -n $NAMESPACE -f -
 
 # 3. Esperar rollout
 echo "⏳ Waiting for rollout"
