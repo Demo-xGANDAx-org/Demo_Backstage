@@ -4,7 +4,7 @@ set -e
 
 NAMESPACE=backstage
 APP_NAME=backstage
-IMAGE=$1
+export IMAGE=$1
 
 echo "🚀 Deploying $APP_NAME with image $IMAGE"
 
@@ -14,8 +14,7 @@ kubectl apply -f k8s/manifests
 
 # 2. Actualizar solo la imagen del deployment
 echo "🔄 Updating deployment image"
-kubectl get deployment $APP_NAME -n $NAMESPACE || kubectl apply -n $NAMESPACE -f k8s/deployment/deployment.yaml
-kubectl set image deployment/$APP_NAME $APP_NAME=$IMAGE -n $NAMESPACE
+envsubst < k8s/deployment/deployment.yaml | kubectl apply -n $NAMESPACE -f -
 
 # 3. Esperar rollout
 echo "⏳ Waiting for rollout"
