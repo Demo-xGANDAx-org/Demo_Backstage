@@ -8,11 +8,11 @@ spec:
   ingressClassName: traefik
   tls:
   - hosts:
-    - backstage.xgandax.xyz
+    - backstage.xgandax.cloud
     secretName: backstage-tls
 
   rules:
-    - host: backstage.xgandax.xyz
+    - host: backstage.xgandax.cloud
       http:
         paths:
           - path: /
